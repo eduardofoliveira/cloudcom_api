@@ -15,48 +15,63 @@ class VerifyPublishPipedrive {
           const chamadaBasixRepository = new ChamadaBasixRepository();
           const userRepository = new UserRepository();
 
-          publishPipedrives.map(async publishPipedrive => {
-            const chamadaBasix = await chamadaBasixRepository.findOne({
-              calllogkey: publishPipedrive.calllogkey,
-            });
-
-            if (chamadaBasix) {
-              const user = await userRepository.findOne({
-                id: publishPipedrive.fk_user_id,
-              });
-
-              if (user) {
-                const pipedriveService = new PipedriveService({
-                  token: user.token,
-                  url: user.urlPipedrive,
+          const awaitingPublish = publishPipedrives.map(publishPipedrive => {
+            return new Promise(async (resolvePublish, rejectPublish) => {
+              try {
+                const chamadaBasix = await chamadaBasixRepository.findOne({
+                  calllogkey: publishPipedrive.calllogkey,
                 });
 
-                const person_id = await pipedriveService.searchPerson({
-                  number: chamadaBasix.endereco,
-                });
+                if (chamadaBasix) {
+                  const user = await userRepository.findOne({
+                    id: publishPipedrive.fk_user_id,
+                  });
 
-                if (person_id) {
-                  const pipedrive_calllog_id = await pipedriveService.addCallLog(
-                    {
-                      tipo: chamadaBasix.tipo,
-                      start_time: chamadaBasix.inicio,
-                      end_time: chamadaBasix.termino,
-                      from_phone_number: chamadaBasix.ddr,
-                      to_phone_number: chamadaBasix.endereco,
-                      outcome: 'connected',
-                      subject: '',
-                      person_id,
-                    },
-                  );
+                  if (user) {
+                    const pipedriveService = new PipedriveService({
+                      token: user.token,
+                      url: user.urlPipedrive,
+                    });
 
-                  if (pipedrive_calllog_id) {
-                    publishPipedrive.pipedrive_calllog_id = pipedrive_calllog_id;
-                    publishPipedriveRepository.update(publishPipedrive);
+                    const person_id = await pipedriveService.searchPerson({
+                      number: chamadaBasix.endereco,
+                    });
+
+                    if (person_id) {
+                      const pipedrive_calllog_id = await pipedriveService.addCallLog(
+                        {
+                          tipo: chamadaBasix.tipo,
+                          start_time: chamadaBasix.inicio,
+                          end_time: chamadaBasix.termino,
+                          from_phone_number: chamadaBasix.ddr,
+                          to_phone_number: chamadaBasix.endereco,
+                          outcome: 'connected',
+                          subject: '',
+                          person_id,
+                        },
+                      );
+
+                      if (pipedrive_calllog_id) {
+                        publishPipedrive.pipedrive_calllog_id = pipedrive_calllog_id;
+                        publishPipedriveRepository.update(publishPipedrive);
+                      }
+                      resolvePublish(true);
+                    } else {
+                      resolvePublish(true);
+                    }
+                  } else {
+                    resolvePublish(true);
                   }
+                } else {
+                  resolvePublish(true);
                 }
+              } catch (error) {
+                rejectPublish(error);
               }
-            }
+            });
           });
+
+          await Promise.all(awaitingPublish);
           resolve(true);
         } else {
           resolve(true);
