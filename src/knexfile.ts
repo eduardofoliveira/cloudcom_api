@@ -14,7 +14,7 @@ const conexoes = {
     },
   },
   mysqlZabbix: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       host: process.env.ZABBIX_HOST,
       user: process.env.ZABBIX_USER,
@@ -27,7 +27,7 @@ const conexoes = {
     },
   },
   mysqlZabbixProd: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       socketPath: process.env.ZABBIX_SOCKET,
       user: process.env.ZABBIX_USER,
