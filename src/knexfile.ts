@@ -26,6 +26,19 @@ const conexoes = {
       max: 7,
     },
   },
+  mysqlZabbixProd: {
+    client: 'mysql',
+    connection: {
+      socketPath: process.env.ZABBIX_SOCKET,
+      user: process.env.ZABBIX_USER,
+      password: process.env.ZABBIX_PASS,
+      database: process.env.ZABBIX_DATABASE,
+    },
+    pool: {
+      min: 0,
+      max: 7,
+    },
+  },
 };
 
 export default conexoes;

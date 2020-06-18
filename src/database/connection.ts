@@ -8,6 +8,10 @@ interface ExportObj {
 }
 
 const connectionOracle = knex(configuration.oracleCloud);
-const connectionZabbix = knex(configuration.mysqlZabbix);
+const connectionZabbix = knex(
+  process.env.ENVIRONMENT === 'production'
+    ? configuration.mysqlZabbixProd
+    : configuration.mysqlZabbix,
+);
 
 export { connectionOracle, connectionZabbix };
