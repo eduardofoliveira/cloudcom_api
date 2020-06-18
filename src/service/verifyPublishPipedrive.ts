@@ -53,7 +53,9 @@ class VerifyPublishPipedrive {
 
                       if (pipedrive_calllog_id) {
                         publishPipedrive.pipedrive_calllog_id = pipedrive_calllog_id;
-                        publishPipedriveRepository.update(publishPipedrive);
+                        await publishPipedriveRepository.update(
+                          publishPipedrive,
+                        );
                       }
                       resolvePublish(true);
                     } else {
