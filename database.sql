@@ -21,3 +21,5 @@ CREATE TABLE publish_pipedrive(
 	create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY (fk_user_id) REFERENCES users (id)
 );
+
+123
