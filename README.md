@@ -13,6 +13,21 @@ O que a integração contempla:
 
 **Transferência de Gravação** Faz o upload ou disponibiliza um link para fazer o download da gravação no CRM ao qual foi integrado.
 
+# Pipedrive
+
+Dados necessários:
+
+https://**dominio**.pipedrive.com/settings/api
+
+- Token
+
+https://**dominio**.pipedrive.com/settings/caller
+
+- Caller
+- Tipo Pessoal
+- Aplicativo de chamada padrão: Personalizar
+- https://api.cloudcom.com.br/api/v1/integracao/pipedrive?from=[user_id]&to=[number]&deal_id=[deal_id]&person_id=[person_id]&basix_id=Eduardo@cloud.cloudcom.com.br
+
 
 # Como fazer o deploy
 
