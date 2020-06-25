@@ -13,6 +13,10 @@ class User {
 
   password: string;
 
+  active: number;
+
+  active_pipedrive: number;
+
   constructor({
     id,
     username,
@@ -21,6 +25,8 @@ class User {
     urlPipedrive,
     email,
     password,
+    active,
+    active_pipedrive,
   }: User) {
     this.id = id;
     this.username = username;
@@ -29,6 +35,8 @@ class User {
     this.urlPipedrive = urlPipedrive;
     this.email = email;
     this.password = password;
+    this.active = active;
+    this.active_pipedrive = active_pipedrive;
   }
 }
 

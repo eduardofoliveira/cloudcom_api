@@ -16,6 +16,8 @@ interface RetornoDbFindOne {
   url_pipedrive: string;
   email: string;
   hash_password: string;
+  active: number;
+  active_pipedrive: number;
 }
 
 class UserRepository {
@@ -40,6 +42,8 @@ class UserRepository {
         'url_pipedrive',
         'email',
         'hash_password',
+        'active',
+        'active_pipedrive',
       )
       .select()
       .from('users')
@@ -54,6 +58,8 @@ class UserRepository {
         urlPipedrive: user.url_pipedrive,
         email: user.email,
         password: user.hash_password,
+        active: user.active,
+        active_pipedrive: user.active_pipedrive,
       });
 
       return usuario;
@@ -78,6 +84,8 @@ class UserRepository {
           urlPipedrive: user.url_pipedrive,
           email: user.email,
           password: user.hash_password,
+          active: user.active,
+          active_pipedrive: user.active_pipedrive,
         });
 
         return usuario;
@@ -99,6 +107,8 @@ class UserRepository {
         'url_pipedrive',
         'email',
         'hash_password',
+        'active',
+        'active_pipedrive',
       )
       .select()
       .from('users')
@@ -126,6 +136,8 @@ class UserRepository {
         'url_pipedrive',
         'email',
         'hash_password',
+        'active',
+        'active_pipedrive',
       )
       .select()
       .from('users')

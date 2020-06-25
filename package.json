@@ -5,12 +5,14 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts"
+    "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
+    "dev:test": "ts-node-dev --transpileOnly --ignore-watch node_modules src/test.ts"
   },
   "dependencies": {
     "aws-sdk": "^2.698.0",
     "axios": "^0.19.2",
     "date-fns": "^2.14.0",
+    "deep-object-diff": "^1.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "form-data": "^3.0.0",

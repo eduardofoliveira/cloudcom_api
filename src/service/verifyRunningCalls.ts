@@ -7,7 +7,9 @@ class VerifyRunningCalls {
     return new Promise(async (resolve, reject) => {
       try {
         const userRepository = new UserRepository();
-        const usuarios = await userRepository.find({ where: { active: 1 } });
+        const usuarios = await userRepository.find({
+          where: { active: 1, active_pipedrive: 1 },
+        });
 
         if (usuarios) {
           const chamadaBasixRepository = new ChamadaBasixRepository();
