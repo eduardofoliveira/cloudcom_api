@@ -12,15 +12,13 @@ routes.get(
   basixController.index,
 );
 
+routes.post('/users/list', basixController.listUserAddress);
+
 routes.post('/auth', (req, res) => {
   res.send();
-  // retornar token JWT
 });
 
-routes.post('/subscribe', (req, res) => {
-  res.send();
-  // url = http://bpp.com.br/eventos - POST - Json body
-  // events = registrations, calls, both
-});
+routes.post('/subscribe', basixController.subscribe);
+routes.post('/unsubscribe', basixController.unsubscribe);
 
 export default routes;
