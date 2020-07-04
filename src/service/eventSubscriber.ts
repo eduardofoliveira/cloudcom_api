@@ -49,6 +49,10 @@ class EventSubscriber {
       );
     }
   };
+
+  list = (): Lista[] => {
+    return subscribeRunning;
+  };
 }
 
 // const eventSubscriber = new EventSubscriber();

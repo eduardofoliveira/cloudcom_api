@@ -19,6 +19,7 @@ routes.post('/auth', (req, res) => {
 });
 
 routes.post('/subscribe', basixController.subscribe);
+routes.get('/subscribe/list', basixController.index);
 routes.post('/unsubscribe', basixController.unsubscribe);
 
 export default routes;
