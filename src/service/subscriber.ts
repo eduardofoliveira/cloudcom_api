@@ -88,6 +88,12 @@ class Subscriber {
         // Checa e atualiza as chamadas ativas
         if (this.events === Events.BOTH || this.events === Events.CALLS) {
           const emChamada = statusReturn
+            .map(item => {
+              if (item.usuarioTerminal) {
+                item.usuario = item.usuarioTerminal;
+              }
+              return item;
+            })
             .filter(item => {
               if (item.estado !== null) {
                 return true;
