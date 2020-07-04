@@ -1,13 +1,24 @@
 import { Request, Response } from 'express';
 
 import UserAddressRepository from '../repository/userAddressRepository';
-import eventSubscriber, { Events } from '../service/eventSubscriber';
+import eventSubscriber, { Events, Lista } from '../service/eventSubscriber';
 
 export default {
   index(req: Request, res: Response): Response {
-    console.log(eventSubscriber.list());
-    return res.send();
-    // return res.json(eventSubscriber.list());
+    const lista = eventSubscriber.list();
+    const returnList = lista.map((item: Lista) => {
+      return {
+        domain: item.domain,
+        subscriber: {
+          events: item.subscriber.events,
+          url: item.subscriber.url,
+        },
+      };
+    });
+    if (returnList.length > 0) {
+      return res.json(returnList);
+    }
+    return res.status(404).json({ message: 'Não há event subscribers' });
   },
 
   async subscribe(req: Request, res: Response): Promise<Response> {

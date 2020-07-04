@@ -16,7 +16,7 @@ interface MethodUnsubscribe {
   domain: string;
 }
 
-interface Lista {
+export interface Lista {
   domain: string;
   subscriber: Subscriber;
 }
