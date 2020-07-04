@@ -4,8 +4,10 @@ import UserAddressRepository from '../repository/userAddressRepository';
 import eventSubscriber, { Events } from '../service/eventSubscriber';
 
 export default {
-  async index(req: Request, res: Response): Promise<Response> {
-    return res.json(eventSubscriber.list());
+  index(req: Request, res: Response): Response {
+    console.log(eventSubscriber.list());
+    return res.send();
+    // return res.json(eventSubscriber.list());
   },
 
   async subscribe(req: Request, res: Response): Promise<Response> {
