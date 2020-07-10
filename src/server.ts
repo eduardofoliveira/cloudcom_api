@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 // import { detailedDiff } from 'deep-object-diff';
 
 // import VerifyPublishPipedrive from './service/verifyPublishPipedrive';
@@ -9,6 +10,7 @@ import routes from './routes/api';
 const app = express();
 const port = process.env.PORT || 80;
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
